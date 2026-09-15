@@ -15,7 +15,7 @@
 
     p {
   font-size: 28px;
-  color: #2d7d46;
+   color: #edf9f1;
   font-weight: bold;
   line-height: 1.6;
   letter-spacing: 1px;
@@ -26,9 +26,24 @@
  <p>Grace 的第一個網頁</p>
  <p>我正在學習 GitHub Copilot！</p>
  <a href="https://example.com">點我</a>
-  <audio controls loop>
+  <audio id="background-music">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
+  <script>
+    const music = document.getElementById('background-music');
+
+    music.addEventListener('ended', () => {
+      setTimeout(() => music.play(), 3000);
+    });
+
+    const startMusic = () => {
+      music.play().catch(() => {});
+      document.removeEventListener('pointerdown', startMusic);
+    };
+
+    startMusic();
+    document.addEventListener('pointerdown', startMusic);
+  </script>
  <style>
   button {
     background-color: green;
